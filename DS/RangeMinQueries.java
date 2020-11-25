@@ -18,7 +18,7 @@ class RangeMinQueries {
         st = new int[4*ga.length];
         Arrays.fill(st, Integer.MAX_VALUE);
     }
-    RangeMinQueries(int a[]){
+    void buildSegmentTree(int a[]){
         ga = a;
         st = new int[4*a.length];
         Arrays.fill(st, Integer.MAX_VALUE);
@@ -65,12 +65,14 @@ class RangeMinQueries {
     }
 
     public static void main(String args[]){
-        int a[] = {5, 2, 7, 1, 3};
-        RangeMinQueries rmq = new RangeMinQueries(a);
-        System.out.println(rmq.minQuery(0, 4));
-        System.out.println(rmq.minQuery(2, 4));
-        System.out.println(rmq.minQuery(0, 2));
-        System.out.println(rmq.minQuery(0, 0));
-        System.out.println(rmq.minQuery(4, 4));
+        int a[] = {15, 12, 17, 11, 3, 5, 32, 21, 0, 1, 3};
+        RangeMinQueries rmq = new RangeMinQueries();
+        rmq.buildSegmentTree(a);
+        System.out.println(rmq.minQuery(0, 4)==3);
+        System.out.println(rmq.minQuery(2, 8)==0);
+        System.out.println(rmq.minQuery(0, 2)==12);
+        System.out.println(rmq.minQuery(0, 0)==15);
+        System.out.println(rmq.minQuery(4, 4)==3);
+        System.out.println(rmq.minQuery(4, 9)==0);
     }
 }
