@@ -61,7 +61,7 @@ class RangeMinQueries {
     void update(int arrIdx, int arrVal){
         ga[arrIdx] = arrVal;
         update(0, 0, ga.length-1, arrIdx, arrVal);
-        printDebug();
+        //printDebug();
     }
 
     public static void main(String args[]){
