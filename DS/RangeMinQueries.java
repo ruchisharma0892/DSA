@@ -4,9 +4,18 @@ import java.util.Arrays;
 class RangeMinQueries {
     int ga[];
     int st[];
+    void printArray(int a[], int n){
+        for(int i=0;i<n;i++)
+            System.out.print(a[i]+ " ");
+        System.out.println();
+    }
+    void printDebug(){
+        printArray(ga, ga.length);
+        printArray(st, st.length);
+    }
     RangeMinQueries(){
         ga = new int[100001];
-        st = new int[4*a.length];
+        st = new int[4*ga.length];
         Arrays.fill(st, Integer.MAX_VALUE);
     }
     RangeMinQueries(int a[]){
@@ -37,8 +46,9 @@ class RangeMinQueries {
 
     int update(int stRoot, int stLeft, int stRight, int arrIdx, int arrVal){
         if(stLeft==stRight){
-            st[stLeft] = ga[arrIdx];
-            return ga[arrIdx];
+            if(stLeft==arrIdx)
+                st[stRoot] = ga[arrIdx];
+            return st[stRoot];
         }
         int mid = getMid(stLeft, stRight); 
         int ans = Math.min(
@@ -51,11 +61,16 @@ class RangeMinQueries {
     void update(int arrIdx, int arrVal){
         ga[arrIdx] = arrVal;
         update(0, 0, ga.length-1, arrIdx, arrVal);
+        printDebug();
     }
 
     public static void main(String args[]){
         int a[] = {5, 2, 7, 1, 3};
         RangeMinQueries rmq = new RangeMinQueries(a);
         System.out.println(rmq.minQuery(0, 4));
+        System.out.println(rmq.minQuery(2, 4));
+        System.out.println(rmq.minQuery(0, 2));
+        System.out.println(rmq.minQuery(0, 0));
+        System.out.println(rmq.minQuery(4, 4));
     }
 }
